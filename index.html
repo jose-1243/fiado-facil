@@ -1,0 +1,456 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#126b50">
+  <meta name="description" content="Control sencillo de fiados para tenderos.">
+  <title>Fiado Fácil</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="app-shell">
+
+    <header class="topbar">
+      <a href="#" class="brand" aria-label="Fiado Fácil inicio">
+        <span class="brand-icon">F</span>
+        <span>Fiado<span class="brand-light">Fácil</span></span>
+      </a>
+
+      <span class="connection-label">
+        <span class="connection-dot"></span>
+        En línea
+      </span>
+    </header>
+
+    <main>
+      <!-- AUTENTICACIÓN -->
+      <section id="authSection" class="auth-section">
+
+        <div class="auth-intro">
+          <div class="hero-icon">₱</div>
+          <p class="eyebrow">TU NEGOCIO, EN ORDEN</p>
+          <h1>Los fiados bajo control.</h1>
+          <p class="muted">
+            Lleva las cuentas de tus clientes de forma fácil y rápida.
+          </p>
+        </div>
+
+        <!-- INICIAR SESIÓN -->
+        <div id="vistaLogin" class="auth-card">
+          <h2>Iniciar sesión</h2>
+          <p class="muted">Entra a tu cuenta para continuar.</p>
+
+          <form id="formLogin">
+            <label for="emailLogin">Correo electrónico</label>
+            <input
+              id="emailLogin"
+              name="email"
+              type="email"
+              autocomplete="email"
+              maxlength="254"
+              placeholder="tucorreo@ejemplo.com"
+              required
+            >
+
+            <label for="password">Contraseña</label>
+            <input
+              id="password"
+              type="password"
+              autocomplete="current-password"
+              placeholder="Tu contraseña"
+              required
+            >
+
+            <button class="btn btn-primary btn-full" type="submit">
+              Iniciar sesión
+            </button>
+          </form>
+
+          <p id="mensajeAuth" class="form-message" role="status"></p>
+
+          <div class="auth-switch">
+            ¿Aún no tienes cuenta?
+            <button id="btnMostrarRegistro" class="text-button" type="button">
+              Crear cuenta
+            </button>
+          </div>
+        </div>
+
+        <!-- CREAR CUENTA -->
+        <div id="vistaRegistro" class="auth-card hidden">
+          <h2>Crear cuenta</h2>
+          <p class="muted">Registra los datos del dueño del negocio.</p>
+
+          <form id="formRegistro">
+
+            <label for="nombreCompleto">Tu nombre</label>
+            <input
+              id="nombreCompleto"
+              type="text"
+              autocomplete="name"
+              placeholder="Nombre completo"
+              maxlength="100"
+              required
+            >
+
+            <label for="telefonoPropietario">Número de celular de contacto</label>
+            <input
+              id="telefonoPropietario"
+              type="tel"
+              inputmode="tel"
+              autocomplete="tel"
+              placeholder="Ej. 3001234567"
+              required
+            >
+
+            <label for="emailRegistro">Correo electrónico</label>
+            <input
+              id="emailRegistro"
+              name="email"
+              type="email"
+              autocomplete="email"
+              maxlength="254"
+              placeholder="tucorreo@ejemplo.com"
+              required
+            >
+
+            <label for="registroPassword">Crear contraseña</label>
+            <input
+              id="registroPassword"
+              type="password"
+              autocomplete="new-password"
+              minlength="6"
+              placeholder="Mínimo 6 caracteres"
+              required
+            >
+
+            <label for="confirmarPassword">Confirmar contraseña</label>
+            <input
+              id="confirmarPassword"
+              type="password"
+              autocomplete="new-password"
+              minlength="6"
+              placeholder="Repite la contraseña"
+              required
+            >
+
+            <button
+              id="btnCrearCuenta"
+              class="btn btn-primary btn-full"
+              type="submit"
+            >
+              Crear mi cuenta
+            </button>
+          </form>
+
+          <p id="mensajeRegistro" class="form-message" role="status"></p>
+
+          <div class="auth-switch">
+            ¿Ya tienes cuenta?
+            <button id="btnVolverLogin" class="text-button" type="button">
+              Iniciar sesión
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- APLICACIÓN PRINCIPAL -->
+      <section id="appMain" class="hidden">
+
+        <div class="welcome-row">
+          <div>
+            <p class="eyebrow">TU NEGOCIO</p>
+            <h1 id="saludoTendero">Hola 👋</h1>
+            <p class="muted">Este es el estado de tus fiados.</p>
+          </div>
+
+          <button id="btnCerrarSesion" class="btn btn-quiet" type="button">
+            Salir
+          </button>
+        </div>
+
+        <!-- RESUMEN -->
+        <div class="stats-grid">
+          <article class="stat-card stat-dark">
+            <span class="stat-label">Te deben en total</span>
+            <strong id="totalDeuda">$0</strong>
+            <span class="stat-foot">Saldo pendiente</span>
+          </article>
+
+          <article class="stat-card">
+            <span class="stat-label">Clientes</span>
+            <strong id="totalClientes">0</strong>
+            <span class="stat-foot">Registrados</span>
+          </article>
+        </div>
+
+        <!-- CLIENTES -->
+        <section id="customers-section" class="panel">
+
+          <div class="section-heading">
+            <div>
+              <h2>Mis clientes</h2>
+              <p class="muted">Consulta cuentas y registra fiados.</p>
+            </div>
+
+            <button id="btnMostrarFormulario" class="btn btn-primary" type="button">
+              <span>＋</span> Cliente
+            </button>
+          </div>
+
+          <!-- FORMULARIO NUEVO CLIENTE -->
+          <form id="formularioCliente" class="inline-form hidden">
+
+            <div class="form-grid">
+              <div>
+                <label for="nombre">Nombre del cliente</label>
+                <input
+                  id="nombre"
+                  type="text"
+                  placeholder="Ej. María Pérez"
+                  maxlength="100"
+                  required
+                >
+              </div>
+
+              <div>
+                <label for="telefono">Celular (opcional)</label>
+                <input
+                  id="telefono"
+                  type="tel"
+                  inputmode="tel"
+                  placeholder="Número de contacto"
+                >
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button id="btnCancelar" class="btn btn-quiet" type="button">
+                Cancelar
+              </button>
+
+              <button class="btn btn-primary" type="submit">
+                Guardar cliente
+              </button>
+            </div>
+          </form>
+
+          <!-- BUSCADOR -->
+          <div class="search-wrap">
+            <span aria-hidden="true">⌕</span>
+            <input
+              id="buscarCliente"
+              type="search"
+              placeholder="Buscar cliente..."
+              aria-label="Buscar cliente"
+            >
+          </div>
+
+          <p id="estadoClientes" class="muted small"></p>
+          <p id="mensajeClientes" class="form-message" role="status"></p>
+
+          <div id="listaClientes" class="customer-list"></div>
+
+          <div id="estadoVacio" class="empty-state hidden">
+            <div class="empty-icon">♧</div>
+            <h3>Aún no tienes clientes</h3>
+            <p class="muted">
+              Agrega el primero y empieza a organizar tus cuentas.
+            </p>
+
+            <button id="btnPrimerCliente" class="btn btn-primary" type="button">
+              Agregar primer cliente
+            </button>
+          </div>
+        </section>
+
+        <!-- CUENTA INDIVIDUAL DEL CLIENTE -->
+        <section id="seccionFiados" class="panel account-panel hidden">
+
+          <div class="account-top">
+            <button id="btnCerrarFiados" class="back-button" type="button">
+              ← Volver a clientes
+            </button>
+
+            <span class="account-tag">CUENTA DEL CLIENTE</span>
+          </div>
+
+          <div class="account-title">
+            <div id="avatarCliente" class="customer-avatar large">C</div>
+
+            <div>
+              <h2 id="nombreClienteFiados">Cliente</h2>
+              <p id="telefonoClienteFiados" class="muted"></p>
+            </div>
+          </div>
+
+          <!-- SALDO -->
+          <div class="balance-card">
+            <span>Saldo pendiente</span>
+            <strong id="saldoCliente">$0</strong>
+            <span id="cantidadFiados" class="balance-detail">
+              0 fiados pendientes
+            </span>
+          </div>
+
+    
+<!-- ACCIONES -->
+<div class="account-actions">
+  <button
+    id="btnMostrarNuevoFiado"
+    class="btn btn-primary"
+    type="button"
+  >
+    ＋ Registrar fiado
+  </button>
+
+  <button
+    id="btnMostrarAbono"
+    class="btn btn-secondary"
+    type="button"
+  >
+    ↓ Registrar abono
+  </button>
+
+  <button
+    id="btnRecordatorioWhatsApp"
+    class="btn btn-secondary"
+    type="button"
+  >
+    Enviar recordatorio por WhatsApp
+  </button>
+</div>
+
+
+          <!-- FORMULARIO FIADO -->
+          <form id="formularioFiado" class="entry-form hidden">
+
+            <div class="form-title">
+              <h3>Nuevo fiado</h3>
+
+              <button
+                id="btnCancelarFiado"
+                class="icon-button"
+                type="button"
+                aria-label="Cerrar"
+              >
+                ×
+              </button>
+            </div>
+
+            <label for="valorFiado">Valor del fiado (COP)</label>
+            <input
+              id="valorFiado"
+              type="number"
+              min="1"
+              step="1"
+              inputmode="numeric"
+              placeholder="Ej. 15000"
+              required
+            >
+
+            <label for="conceptoFiado">¿Qué se llevó? (opcional)</label>
+            <input
+              id="conceptoFiado"
+              type="text"
+              maxlength="200"
+              placeholder="Ej. Arroz, aceite y huevos"
+            >
+
+            <p class="muted small">La fecha se registra automáticamente.</p>
+
+            <button class="btn btn-primary btn-full" type="submit">
+              Guardar fiado
+            </button>
+
+            <p id="mensajeFiados" class="form-message" role="status"></p>
+          </form>
+
+          <!-- FORMULARIO ABONO -->
+          <form id="formularioAbono" class="entry-form hidden">
+
+            <div class="form-title">
+              <h3>Registrar abono</h3>
+
+              <button
+                id="btnCancelarAbono"
+                class="icon-button"
+                type="button"
+                aria-label="Cerrar"
+              >
+                ×
+              </button>
+            </div>
+
+            <label for="valorAbono">Valor recibido (COP)</label>
+            <input
+              id="valorAbono"
+              type="number"
+              min="1"
+              step="1"
+              inputmode="numeric"
+              placeholder="Ej. 10000"
+              required
+            >
+
+            <label for="notaAbono">Nota (opcional)</label>
+            <input
+              id="notaAbono"
+              type="text"
+              maxlength="200"
+              placeholder="Ej. Pagó en efectivo"
+            >
+
+            <p class="muted small">
+              El abono se distribuirá entre los fiados más antiguos.
+            </p>
+
+            <button class="btn btn-primary btn-full" type="submit">
+              Guardar abono
+            </button>
+
+            <p id="mensajeAbonos" class="form-message" role="status"></p>
+          </form>
+
+          <!-- HISTORIAL -->
+          <div class="history-heading">
+            <h3>Movimientos</h3>
+            <span id="cantidadMovimientos" class="muted small">
+              0 movimientos
+            </span>
+          </div>
+
+          <p id="mensajeMovimientos" class="form-message" role="status"></p>
+
+          <div id="listaFiados" class="movement-list"></div>
+        </section>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span class="brand-mini">Fiado Fácil</span>
+      <span>Control sencillo para tu negocio.</span>
+    </footer>
+
+  </div>
+
+  <!-- NOTIFICACIONES -->
+  <div
+    id="toast"
+    class="toast hidden"
+    role="status"
+    aria-live="polite"
+  ></div>
+
+  <!-- IMPORTANTE: script.js debe estar en la misma carpeta -->
+  <script type="module" src="script.js"></script>
+</body>
+</html>

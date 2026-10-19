@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Fiado Fácil - Envío WhatsApp",
+  "version": "1.0.0",
+  "description": "Envía automáticamente los avisos de fiados desde WhatsApp Web.",
+  "icons": { "128": "icon128.png" },
+  "permissions": ["tabs", "storage", "notifications", "scripting"],
+  "host_permissions": ["https://web.whatsapp.com/*"],
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [
+    {
+      "matches": ["https://web.whatsapp.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://fiadofacil.app/*",
+      "http://localhost/*",
+      "http://127.0.0.1/*"
+    ]
+  },
+  "action": {
+    "default_title": "Fiado Fácil WhatsApp",
+    "default_popup": "popup.html"
+  }
+}

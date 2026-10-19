@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      padding: 14px 16px;
+      width: 260px;
+      color: #1c1c1e;
+    }
+    h1 { font-size: 14px; margin: 0 0 10px; }
+    p { font-size: 12px; margin: 6px 0; line-height: 1.4; }
+    .ok { color: #126b50; font-weight: 600; }
+    .off { color: #b3261e; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <h1>Fiado Fácil - WhatsApp</h1>
+  <p>WhatsApp Web: <span id="estadoWhats" class="off">…</span></p>
+  <p>Mensajes en cola: <span id="cola">0</span></p>
+  <p id="ultimo">Sin envíos todavía.</p>
+  <script src="popup.js"></script>
+</body>
+</html>
